@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width:device-width, initial-scale=1.0">
+	<style>
+		* {
+			box-sizing: inherit;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			font-size: 62.5%;
+		}
+
+		body {
+			boxsizing: border-box;
+			background-color: #eee;
+			color: #333;
+			font-family: sans-serif;
+			line-height: 1.6;
+			width: 100vw;
+			height: 100vh;
+		}
+
+		h1 {
+			font-size: 3rem;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		a:link {
+			text-decoration: none;
+		}
+
+		.btn {
+			cursor: pointer;
+			display: inline-block;
+			background-color: #047baa;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			padding: 1.5rem 1rem;
+			width: 100%;
+		}
+
+		.btn:hover {
+			opacity: 0.7;
+		}
+
+		.conteiner {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+		}
+
+		#formulario {
+			width: 60%;
+		}
+
+		#formulario .campo {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+
+		#formulario .campo input {
+			display: block;
+			width: 100%;
+			padding: 12px 10px;
+			border: none;
+			border: 1px solid #ccc;
+			background: #f1f1f1;
+		}
+
+		#formulario input:focus {
+			outline: 1px solid #047baa;
+		}
+
+		#formulario label {
+			display: block;
+			width: 100%;
+			font-size: 1.3rem;
+			margin-bottom: 5px;
+		}
+
+
+		#formulario .btn {
+			margin-top: 10px;
+		}
+
+		#formulario .btn:hover {
+			opacity: 0.95;
+		}
+
+	</style>
+	<script>
+		function renomeia() {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const estado = urlParams.get('estado');
+
+			if (!estado) {
+				document.getElementsByTagName('h1')[0].innerHTML = 'Pesquisa Jurídica';
+			} else {
+				document.getElementsByTagName('h1')[0].innerHTML = 'Pesquisa Jurídica - ' + estado;
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			renomeia();
+		}, false);
+
+		async function pesquisar() {
+			if (confirm('Vamos buscar no nosso banco de dados, por favor aguarde. Pode durar alguns minutos.')) {
+				await new Promise(r => setTimeout(r, 3000));
+				if (Math.random() < 0.5) {
+					alert('Nenhum processo encontrado!');
+				} else {
+					confirm('Processo encontrado com sucesso! Deseja acessar?');
+				}
+
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="conteiner">
+		<form id="formulario">
+			<h1>Pesquisa</h1>
+
+			<div class="campo">
+				<label for="nome"><strong>Nome da parte</strong></label>
+				<input type="text" id="nome" name="nome">
+			</div>
+
+			<div class="campo">
+				<label for="advogado"><strong>Advogado</strong></label>
+				<input type="text" id="advogado" name="advogado">
+			</div>
+
+			<div class="campo">
+				<label for="numero"><strong>Número do processo</strong></label>
+				<input type="text" id="numero" name="numero">
+			</div>
+
+			<button type="button" class="btn registerbtn" onclick="pesquisar()">Pesquisar</button>
+
+		</form>
+	</div>
+</body>
+
+</html>
